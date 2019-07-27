@@ -3,6 +3,7 @@ import torch
 import torch.nn.functional as F
 from modules.util import Hourglass, make_coordinate_grid, matrix_inverse, smallest_singular
 
+from matplotlib import pyplot as plt
 
 def kp2gaussian(kp, spatial_size, kp_variance='matrix'):
     """
@@ -104,6 +105,12 @@ class KPDetector(nn.Module):
         heatmap = F.softmax(heatmap / self.temperature, dim=3)
         heatmap = heatmap.view(*final_shape)
 
+        print(heatmap.data.shape)
+        for i, hmap in enumerate(heatmap.data[0].cpu().numpy()):
+            plt.imsave("heat" + str(i) + ".png", hmap[0])
+
         out = gaussian2kp(heatmap, self.kp_variance, self.clip_variance)
+
+        #print(out)
 
         return out

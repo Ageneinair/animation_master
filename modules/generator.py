@@ -6,6 +6,10 @@ from modules.util import Encoder, Decoder, ResBlock3D
 from modules.dense_motion_module import DenseMotionModule, IdentityDeformation
 from modules.movement_embedding import MovementEmbeddingModule
 
+from matplotlib import pyplot as plt
+import numpy as np
+import sys
+
 
 class MotionTransferGenerator(nn.Module):
     """
@@ -16,6 +20,8 @@ class MotionTransferGenerator(nn.Module):
     def __init__(self, num_channels, num_kp, kp_variance, block_expansion, max_features, num_blocks, num_refinement_blocks,
                  dense_motion_params=None, kp_embedding_params=None, interpolation_mode='nearest'):
         super(MotionTransferGenerator, self).__init__()
+
+        print("init Motion Transfer Generator")
 
         self.appearance_encoder = Encoder(block_expansion, in_features=num_channels, max_features=max_features,
                                           num_blocks=num_blocks)
@@ -50,11 +56,26 @@ class MotionTransferGenerator(nn.Module):
 
     def deform_input(self, inp, deformations_absolute):
         bs, d, h_old, w_old, _ = deformations_absolute.shape
+        #print(str(deformations_absolute.shape))
+
         _, _, _, h, w = inp.shape
+
+        #plt.imsave("inp.png", inp.data[0, 0, 0].cpu().numpy())
+
         deformations_absolute = deformations_absolute.permute(0, 4, 1, 2, 3)
         deformation = F.interpolate(deformations_absolute, size=(d, h, w), mode=self.interpolation_mode)
+        #print(str(deformation.shape))
+        #plt.imsave("deformation.png", deformation[0, 0, 0].cpu().numpy())
         deformation = deformation.permute(0, 2, 3, 4, 1)
+        
+        print(str(deformation.shape))
+        #deform = deformation[0, 0].cpu().numpy()
+        #plt.imsave("deformation.png", np.sqrt(deform[:,:,0] ** 2 + deform[:,:,1] ** 2 + deform[:,:,2] ** 2))
+
         deformed_inp = F.grid_sample(inp, deformation)
+        #print(str(deformed_inp.shape))
+        #plt.imsave("deformation.png", deformed_inp[0, 0, 0].cpu().numpy())
+
         return deformed_inp
 
     def forward(self, source_image, kp_driving, kp_source):
@@ -64,19 +85,43 @@ class MotionTransferGenerator(nn.Module):
                                                          kp_source=kp_source)
 
         deformed_skips = [self.deform_input(skip, deformations_absolute) for skip in appearance_skips]
+        
 
         if self.kp_embedding_module is not None:
             d = kp_driving['mean'].shape[1]
             movement_embedding = self.kp_embedding_module(source_image=source_image, kp_driving=kp_driving,
                                                           kp_source=kp_source)
+            
+            print(movement_embedding.shape)
+            plt.imsave("moveembed.png", movement_embedding[0, 0, 0].cpu().numpy())
+
             kp_skips = [F.interpolate(movement_embedding, size=(d,) + skip.shape[3:], mode=self.interpolation_mode) for skip in appearance_skips]
             skips = [torch.cat([a, b], dim=1) for a, b in zip(deformed_skips, kp_skips)]
         else:
             skips = deformed_skips
-
+        
+        """print("absolute deformations: " + str(deformations_absolute.data.shape))
+        deform_abs = deformations_absolute.data[0, 0].cpu().numpy()
+        plt.imsave("abs_deformation" + str(test_id) + ".png", np.sqrt(deform_abs[:, :, 0] ** 2 + deform_abs[:, :, 1] ** 2 + deform_abs[:, :, 2] ** 2))
+        test_id = test_id + 1"""
+        
         video_deformed = self.deform_input(source_image, deformations_absolute)
+        #print(video_deformed.shape)
+        #plt.imsave("deformed.png", video_deformed[0, 0, 0].cpu().numpy())
         video_prediction = self.video_decoder(skips)
+
+        """print(video_prediction.shape)
+        test = np.zeros((128, 128))
+        for i in video_prediction[0].cpu().numpy():
+            test += i[0]
+        plt.imsave("prediction.png", test)"""
+
         video_prediction = self.refinement_module(video_prediction)
+        print(video_prediction.shape)
+        #plt.imsave("prediction.png", video_prediction[0, 0, 0].cpu().numpy())
         video_prediction = torch.sigmoid(video_prediction)
+
+        #print(video_prediction.shape)
+        plt.imsave("prediction.png", video_prediction[0, 0, 0].cpu().numpy())
 
         return {"video_prediction": video_prediction, "video_deformed": video_deformed}

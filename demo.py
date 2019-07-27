@@ -30,6 +30,7 @@ if __name__ == "__main__":
     parser.add_argument("--cpu", dest="cpu", action="store_true", help="Use cpu")
     parser.add_argument("--image_shape", default=(128, 128), type=lambda x: tuple([int(a) for a in x.split(',')]),
                         help="Image shape")
+    parser.add_argument("--i_am_iddo_drori", default=False, help="for the professor")
     parser.set_defaults(cpu=False)
 
     opt = parser.parse_args()
