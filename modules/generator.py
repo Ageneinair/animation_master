@@ -92,8 +92,8 @@ class MotionTransferGenerator(nn.Module):
             movement_embedding = self.kp_embedding_module(source_image=source_image, kp_driving=kp_driving,
                                                           kp_source=kp_source)
             
-            print(movement_embedding.shape)
-            plt.imsave("moveembed.png", movement_embedding[0, 0, 0].cpu().numpy())
+            #print(movement_embedding.shape)
+            plt.imsave("horsemoveembed.png", movement_embedding[0, 0, 0].cpu().numpy())
 
             kp_skips = [F.interpolate(movement_embedding, size=(d,) + skip.shape[3:], mode=self.interpolation_mode) for skip in appearance_skips]
             skips = [torch.cat([a, b], dim=1) for a, b in zip(deformed_skips, kp_skips)]
@@ -117,11 +117,11 @@ class MotionTransferGenerator(nn.Module):
         plt.imsave("prediction.png", test)"""
 
         video_prediction = self.refinement_module(video_prediction)
-        print(video_prediction.shape)
-        #plt.imsave("prediction.png", video_prediction[0, 0, 0].cpu().numpy())
+        #print(video_prediction.shape)
+        plt.imsave("horseprediction_before_sigmoid.png", video_prediction[0, 0, 0].cpu().numpy())
         video_prediction = torch.sigmoid(video_prediction)
 
         #print(video_prediction.shape)
-        plt.imsave("prediction.png", video_prediction[0, 0, 0].cpu().numpy())
+        plt.imsave("horseprediction.png", video_prediction[0, 0, 0].cpu().numpy())
 
         return {"video_prediction": video_prediction, "video_deformed": video_deformed}

@@ -34,6 +34,7 @@ if __name__ == "__main__":
     parser.set_defaults(cpu=False)
 
     opt = parser.parse_args()
+    #print(opt.i_am_iddo_drori)
 
     with open(opt.config) as f:
         config = yaml.load(f)
