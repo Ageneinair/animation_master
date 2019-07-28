@@ -41,7 +41,7 @@ You can also check training data reconstructions in the ```train-vis``` subfolde
 ### Datasets
 
 1) **Shapes**. This dataset is saved along with repository.
-Training takes about 17 minuts in Colab.
+Training takes about 17 minutes in Colab.
 
 2) **Actions**. This dataset is also saved along with repository.
  And training takes about 1 hour.
