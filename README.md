@@ -32,7 +32,7 @@ To train a model on specific dataset run:
 ```
 CUDA_VISIBLE_DEVICES=0 python run.py --config config/dataset_name.yaml
 ```
-The code will create a folder in the log directory (each run will create a time-stamped new directory).
+The command will create a folder in the log directory (each run will create a time-stamped new directory).
 Checkpoints will be saved to this folder.
 To check the loss values during training in see ```log.txt```.
 You can also check training data reconstructions in the ```train-vis``` subfolder.
@@ -46,7 +46,7 @@ Training takes about 17 minutes in Colab.
 2) **Actions**. This dataset is also saved along with repository.
  And training takes about 1 hour.
 
-3) **Tai-chi**. We havn't tried this.
+3) **Tai-chi**. To be trained in the future.
 
 4) **MGif**. The preprocessed version of this dataset can be [downloaded](https://yadi.sk/d/5VdqLARizmnj3Q).
  [Check for details on this dataset](sup-mat/MGif/README.md). Training takes about  hours, on 1 gpu.
