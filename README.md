@@ -46,7 +46,7 @@ Training takes about 17 minuts in Colab.
 2) **Actions**. This dataset is also saved along with repository.
  And training takes about 1 hour.
 
-3) **Taichi**. We havn't tried this.
+3) **Tai-chi**. We havn't tried this.
 
 4) **MGif**. The preprocessed version of this dataset can be [downloaded](https://yadi.sk/d/5VdqLARizmnj3Q).
  [Check for details on this dataset](sup-mat/MGif/README.md). Training takes about  hours, on 1 gpu.
