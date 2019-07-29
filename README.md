@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ### Motion Transfer Demo 
 
-To run a demo, download a [checkpoint]() and run the following command:
+To run a demo, download a [checkpoint](https://drive.google.com/file/d/1zR5Wp9iagHG379jsauLyLH_BTQQqatdF/view?usp=sharing) and run the following command:
 ```
 python demo.py --config config/moving-gif.yaml --checkpoint <path/to/checkpoint>
 ```
@@ -40,7 +40,7 @@ You can also check training data reconstructions in the ```train-vis``` subfolde
 
 ### Datasets
 
-1) **Shapes**. This dataset is saved along with repository.
+1) **Shapes**. This dataset is saved along with repository. Download the [checkpoint](https://drive.google.com/file/d/108KLShVodN_KxtGUGg9cRJm0lWF0dBkg/view?usp=sharing).
 Training takes about 17 minutes in Colab.
 
 2) **Actions**. This dataset is also saved along with repository.
@@ -49,5 +49,5 @@ Training takes about 17 minutes in Colab.
 3) **Tai-chi**. To be trained in the future.
 
 4) **MGif**. The preprocessed version of this dataset can be [downloaded](https://yadi.sk/d/5VdqLARizmnj3Q).
- [Check for details on this dataset](sup-mat/MGif/README.md). Training takes about  hours, on 1 gpu.
+ [Check for details on this dataset](sup-mat/MGif/README.md). Download the [checkpoint](https://drive.google.com/file/d/1zR5Wp9iagHG379jsauLyLH_BTQQqatdF/view?usp=sharing). Training takes about 10 hours, on 1 gpu.
 
