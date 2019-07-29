@@ -20,7 +20,7 @@ Heatmaps for individual keypoint locations:\
 <img src="visual/heat3.png" width="200" height="200">\
 The source image:\
 \
-<img src="visual/heatsource.png" width = "512" height="512">
+<img src="visual/heatsource.png" width = "300" height="300">
 
 
 ### Motion Transfer Demo 
