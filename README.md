@@ -13,12 +13,12 @@ pip install -r requirements.txt
 ## Visualization examples
 ### Shapes dataset
 Heatmaps for individual keypoint locations:\
-![Screenshot](visual/heat0.png =128x128)
-![Screenshot](visual/heat1.png =128x128)\
-![Screenshot](visual/heat2.png =128x128)
-![Screenshot](visual/heat3.png =128x128)\
+![](visual/heat0.png =128x128)
+![](visual/heat1.png =128x128)\
+![](visual/heat2.png =128x128)
+![](visual/heat3.png =128x128)\
 The source image:\
-![Screenshot](visual/heatsource.png =128x128)
+![](visual/heatsource.png =128x128)
 
 
 ### Motion Transfer Demo 
