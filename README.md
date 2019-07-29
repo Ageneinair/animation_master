@@ -10,6 +10,18 @@ To install the dependencies run:
 pip install -r requirements.txt
 ```
 
+## Visualization examples
+### Shapes dataset
+Heatmaps for individual keypoint locations:\
+\
+<img src="visual/heat0.png" width="200" height="200">
+<img src="visual/heat1.png" width="200" height="200">
+<img src="visual/heat2.png" width="200" height="200">
+<img src="visual/heat3.png" width="200" height="200">\
+The source image:\
+\
+<img src="visual/heatsource.png" width = "300" height="300">
+
 
 ### Motion Transfer Demo 
 
