@@ -3,7 +3,7 @@ from tqdm import tqdm
 import torch
 from torch.utils.data import DataLoader
 from logger import Logger, Visualizer
-from modules.losses import reconstruction_loss
+from modules.losses import reconstruction_loss, akd_loss, aed_loss
 import numpy as np
 import imageio
 from sync_batchnorm import DataParallelWithCallback
@@ -42,6 +42,8 @@ def reconstruction(config, generator, kp_detector, checkpoint, log_dir, dataset)
         os.makedirs(png_dir)
 
     loss_list = []
+    akd_list = []
+    aed_list = []
     generator = DataParallelWithCallback(generator)
     kp_detector = DataParallelWithCallback(kp_detector)
 
@@ -56,11 +58,22 @@ def reconstruction(config, generator, kp_detector, checkpoint, log_dir, dataset)
         with torch.no_grad():
             kp_appearance = kp_detector(x['video'][:, :, :1])
             d = x['video'].shape[2]
+            #print("d is " + str(d))
+            #print("video len is " + str(x['video'].shape))
             kp_video = cat_dict([kp_detector(x['video'][:, :, i:(i + 1)]) for i in range(d)], dim=1)
 
             out = generate(generator, appearance_image=x['video'][:, :, :1], kp_appearance=kp_appearance,
                            kp_video=kp_video)
             x['source'] = x['video'][:, :, :1]
+            
+            kp_out = cat_dict([kp_detector(out['video_prediction'][:, :, i:(i + 1)]) for i in  range(d)], dim=1)
+
+            aed = aed_loss(x['video'].cpu(), out['video_prediction'].cpu(), 1)
+            aed_list.append(aed)
+
+            
+            akd = akd_loss(kp_video['mean'].cpu(), kp_out['mean'].cpu(), 1)
+            akd_list.append(akd)
 
             # Store to .png for evaluation
             out_video_batch = out['video_prediction'].data.cpu().numpy()
@@ -73,5 +86,18 @@ def reconstruction(config, generator, kp_detector, checkpoint, log_dir, dataset)
 
             loss = reconstruction_loss(out['video_prediction'].cpu(), x['video'].cpu(), 1)
             loss_list.append(loss.data.cpu().numpy())
+
+            #print("kp_video: " + str(kp_video['mean']))
+            #print("kp_appearance: " + str(kp_appearance['mean']))
+            #print(str(np.mean()))
+            #print("appearance: " + str(kp_appearance['mean'].shape))
+            """
+            for i, tnsr in enumerate(kp_video['mean']):
+                print("distance: " + str(tnsr - kp_appearance['mean']))
+                print("##################### " + str(i) + " #####################")
+            """
+
             del x, kp_video, kp_appearance, out, loss
     print("Reconstruction loss: %s" % np.mean(loss_list))
+    print("AED loss: %s" % np.mean(aed_list))
+    print("AKD loss: %s" % np.mean(akd_list))

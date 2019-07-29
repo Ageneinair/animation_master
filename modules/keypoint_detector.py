@@ -97,8 +97,8 @@ class KPDetector(nn.Module):
 
     def forward(self, x):
 
-        #print("x " + str(x.data.shape))
-        plt.imsave("horseheatsource.png", x.data[0, 0, 0].cpu().numpy())
+        print("x " + str(x.data.shape))
+        plt.imsave("heatsource.png", x.data[0, 0, 0].cpu().numpy())
         
         if self.scale_factor != 1:
             x = F.interpolate(x, scale_factor=(1, self.scale_factor, self.scale_factor))
@@ -109,12 +109,12 @@ class KPDetector(nn.Module):
         heatmap = F.softmax(heatmap / self.temperature, dim=3)
         heatmap = heatmap.view(*final_shape)
 
-        #print(heatmap.data.shape)
+        print(heatmap.data.shape)
         for i, hmap in enumerate(heatmap.data[0].cpu().numpy()):
-            plt.imsave("horseheat" + str(i) + ".png", hmap[0])
-
+            plt.imsave("heat" + str(i) + ".png", hmap[0])
+        
         out = gaussian2kp(heatmap, self.kp_variance, self.clip_variance)
 
-        #print(out)
+        #print("output of kp detecor " + str(out))
 
         return out

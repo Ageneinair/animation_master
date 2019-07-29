@@ -68,13 +68,13 @@ class MotionTransferGenerator(nn.Module):
         #plt.imsave("deformation.png", deformation[0, 0, 0].cpu().numpy())
         deformation = deformation.permute(0, 2, 3, 4, 1)
         
-        print(str(deformation.shape))
+        #print(str(deformation.shape))
         #deform = deformation[0, 0].cpu().numpy()
-        #plt.imsave("deformation.png", np.sqrt(deform[:,:,0] ** 2 + deform[:,:,1] ** 2 + deform[:,:,2] ** 2))
+        #plt.imsave("deform.png", np.sqrt(deform[:,:,0] ** 2 + deform[:,:,1] ** 2 + deform[:,:,2] ** 2))
 
         deformed_inp = F.grid_sample(inp, deformation)
         #print(str(deformed_inp.shape))
-        #plt.imsave("deformation.png", deformed_inp[0, 0, 0].cpu().numpy())
+        plt.imsave("deformation.png", deformed_inp[0, 0, 0].cpu().numpy())
 
         return deformed_inp
 
@@ -93,7 +93,7 @@ class MotionTransferGenerator(nn.Module):
                                                           kp_source=kp_source)
             
             #print(movement_embedding.shape)
-            plt.imsave("horsemoveembed.png", movement_embedding[0, 0, 0].cpu().numpy())
+            #plt.imsave("horsemoveembed.png", movement_embedding[0, 0, 0].cpu().numpy())
 
             kp_skips = [F.interpolate(movement_embedding, size=(d,) + skip.shape[3:], mode=self.interpolation_mode) for skip in appearance_skips]
             skips = [torch.cat([a, b], dim=1) for a, b in zip(deformed_skips, kp_skips)]
@@ -107,7 +107,7 @@ class MotionTransferGenerator(nn.Module):
         
         video_deformed = self.deform_input(source_image, deformations_absolute)
         #print(video_deformed.shape)
-        #plt.imsave("deformed.png", video_deformed[0, 0, 0].cpu().numpy())
+        plt.imsave("deformed.png", video_deformed[0, 0, 0].cpu().numpy())
         video_prediction = self.video_decoder(skips)
 
         """print(video_prediction.shape)
@@ -118,10 +118,15 @@ class MotionTransferGenerator(nn.Module):
 
         video_prediction = self.refinement_module(video_prediction)
         #print(video_prediction.shape)
-        plt.imsave("horseprediction_before_sigmoid.png", video_prediction[0, 0, 0].cpu().numpy())
+        plt.imsave("prediction_before_sigmoid.png", video_prediction[0, 0, 0].cpu().numpy())
         video_prediction = torch.sigmoid(video_prediction)
 
         #print(video_prediction.shape)
-        plt.imsave("horseprediction.png", video_prediction[0, 0, 0].cpu().numpy())
+        predict = video_prediction[0, 0, 0].cpu().numpy()
+        plt.imsave("prediction.png", predict)
+
+        #print("si " + str(source_image.shape))
+        #plt.imsave("sourceimage1.png", source_image[0, 0, 0].cpu().numpy())
+
 
         return {"video_prediction": video_prediction, "video_deformed": video_deformed}

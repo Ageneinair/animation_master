@@ -65,6 +65,7 @@ def normalize_kp(kp_video, kp_appearance, movement_mult=False, move_location=Fal
 def transfer_one(generator, kp_detector, source_image, driving_video, transfer_params):
     cat_dict = lambda l, dim: {k: torch.cat([v[k] for v in l], dim=dim) for k in l[0]}
     d = driving_video.shape[2]
+    print("driving vid " + str(driving_video.shape))
     kp_driving = cat_dict([kp_detector(driving_video[:, :, i:(i + 1)]) for i in range(d)], dim=1)
     kp_source = kp_detector(source_image)
 

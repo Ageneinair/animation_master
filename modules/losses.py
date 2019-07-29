@@ -1,9 +1,15 @@
 import torch
+import numpy as np
 
+
+def akd_loss(kp_source, kp_predicted, weight):
+    return weight * torch.mean(torch.sqrt(torch.pow(kp_source, 2) + torch.pow(kp_predicted, 2)))
 
 def mean_batch(val):
     return val.view(val.shape[0], -1).mean(-1)
 
+def aed_loss(input_vid, output_vid, weight):
+    return weight * mean_batch(torch.sqrt(torch.pow(input_vid, 2) + torch.pow(output_vid, 2)))
 
 def reconstruction_loss(prediction, target, weight):
     if weight == 0:
