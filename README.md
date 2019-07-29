@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ## Visualization examples
 ### Shapes dataset
 Heatmaps for individual keypoint locations:\
-![](./visual/heat0.png =128x128)
+<img src="visual/heat0.png">
 ![](./visual/heat1.png =128x128)\
 ![](./visual/heat2.png =128x128)
 ![](./visual/heat3.png =128x128)\
