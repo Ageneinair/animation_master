@@ -18,17 +18,13 @@ Heatmaps for individual keypoint locations:\
 <img src="visual/heat1.png" width="200" height="200">
 <img src="visual/heat2.png" width="200" height="200">
 <img src="visual/heat3.png" width="200" height="200">\
-The optical flow:\
+The optical flow and the sampled image:\
 \
-<img src="visual/deform.png" width="200" height="200">\
-The sampled image:\
-\
+<img src="visual/deform.png" width="200" height="200">
 <img src="visual/deformed.png" width="200" height="200">\
-The source image:\
+The source image and the result image:\
 \
-<img src="visual/heatsource.png" width = "300" height="300">\
-The result image:\
-\
+<img src="visual/heatsource.png" width = "300" height="300">
 <img src="visual/prediction.png" width="300" height="300">\
 
 ### MovingGif dataset
@@ -44,18 +40,14 @@ Heatmaps for individual keypoint locations:\
 <img src="visual/mgif_heat7.png" width="150" height="150">
 <img src="visual/mgif_heat8.png" width="150" height="150">
 <img src="visual/mgif_heat9.png" width="150" height="150">\
-The optical flow:\
+The optical flow and the sampled image:\
 \
-<img src="visual/mgif_deform.png" width="200" height="200">\
-The sampled image:\
-\
+<img src="visual/mgif_deform.png" width="200" height="200">
 <img src="visual/mgif_deformed.png" width="200" height="200">\
-The source image:\
+The source image and the result image:\
 \
 <img src="visual/mgif_heatsource.png" width="300" height="300">
-The result image:\
-\
-<img src="visual/mgif_prediction.png" width="300" height="300">
+<img src="visual/mgif_prediction.png" width="300" height="300">\
 
 
 ### Motion Transfer Demo 
