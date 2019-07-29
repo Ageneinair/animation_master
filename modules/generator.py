@@ -69,8 +69,8 @@ class MotionTransferGenerator(nn.Module):
         deformation = deformation.permute(0, 2, 3, 4, 1)
         
         #print(str(deformation.shape))
-        #deform = deformation[0, 0].cpu().numpy()
-        #plt.imsave("deform.png", np.sqrt(deform[:,:,0] ** 2 + deform[:,:,1] ** 2 + deform[:,:,2] ** 2))
+        deform = deformation[0, 0].cpu().numpy()
+        plt.imsave("visual/mgif_deform.png", np.sqrt(deform[:,:,0] ** 2 + deform[:,:,1] ** 2 + deform[:,:,2] ** 2))
 
         deformed_inp = F.grid_sample(inp, deformation)
         #print(str(deformed_inp.shape))
