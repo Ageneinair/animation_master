@@ -12,10 +12,12 @@ pip install -r requirements.txt
 
 ### Visualization examples
 ## Shapes dataset
+Heatmaps for individual keypoint locations:
 ![Screenshot](visual/heat0.png)
 ![Screenshot](visual/heat1.png)
 ![Screenshot](visual/heat2.png)
 ![Screenshot](visual/heat3.png)
+The source image:
 ![Screenshot](visual/heatsource.png)
 
 
