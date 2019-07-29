@@ -25,16 +25,16 @@ The source image:\
 ### MovingGif dataset
 Heatmaps for individual keypoint locations:\
 \
-<img src="visual/mgif_heat0.png" width="175" height="175">
-<img src="visual/mgif_heat1.png" width="175" height="175">
-<img src="visual/mgif_heat2.png" width="175" height="175">
-<img src="visual/mgif_heat3.png" width="175" height="175">
-<img src="visual/mgif_heat4.png" width="175" height="175">\
-<img src="visual/mgif_heat5.png" width="175" height="175">
-<img src="visual/mgif_heat6.png" width="175" height="175">
-<img src="visual/mgif_heat7.png" width="175" height="175">
-<img src="visual/mgif_heat8.png" width="175" height="175">
-<img src="visual/mgif_heat9.png" width="175" height="175">\
+<img src="visual/mgif_heat0.png" width="150" height="150">
+<img src="visual/mgif_heat1.png" width="150" height="150">
+<img src="visual/mgif_heat2.png" width="150" height="150">
+<img src="visual/mgif_heat3.png" width="150" height="150">
+<img src="visual/mgif_heat4.png" width="150" height="150">\
+<img src="visual/mgif_heat5.png" width="150" height="150">
+<img src="visual/mgif_heat6.png" width="150" height="150">
+<img src="visual/mgif_heat7.png" width="150" height="150">
+<img src="visual/mgif_heat8.png" width="150" height="150">
+<img src="visual/mgif_heat9.png" width="150" height="150">\
 The source image:\
 \
 <img src="visual/mgif_heatsource.png" width="300" height="300">
