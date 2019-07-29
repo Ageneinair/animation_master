@@ -10,6 +10,14 @@ To install the dependencies run:
 pip install -r requirements.txt
 ```
 
+### Visualization examples
+## Shapes dataset
+![Screenshot](visual/heat0.png)
+![Screenshot](visual/heat1.png)
+![Screenshot](visual/heat2.png)
+![Screenshot](visual/heat3.png)
+![Screenshot](visual/heatsource.png)
+
 
 ### Motion Transfer Demo 
 
