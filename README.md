@@ -85,7 +85,7 @@ The source image and the result image:\
 <img src="visual/mgif_prediction.png" width="150" height="150">
 
 
-### (#Datasets)
+### Datasets
 
 1) **Shapes**. This dataset is saved along with repository. Download the [checkpoint](https://drive.google.com/file/d/108KLShVodN_KxtGUGg9cRJm0lWF0dBkg/view?usp=sharing).
 Training takes about 17 minutes in Colab.
