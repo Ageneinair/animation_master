@@ -25,7 +25,7 @@ The optical flow and the sampled image:\
 The source image and the result image:\
 \
 <img src="visual/heatsource.png" width = "300" height="300">
-<img src="visual/prediction.png" width="300" height="300">\
+<img src="visual/prediction.png" width="300" height="300">
 
 ### MovingGif dataset
 Heatmaps for individual keypoint locations:\
@@ -47,7 +47,7 @@ The optical flow and the sampled image:\
 The source image and the result image:\
 \
 <img src="visual/mgif_heatsource.png" width="300" height="300">
-<img src="visual/mgif_prediction.png" width="300" height="300">\
+<img src="visual/mgif_prediction.png" width="300" height="300">
 
 
 ### Motion Transfer Demo 
