@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ### Motion Transfer Demo 
 
-To run a demo, download a [checkpoint](https://drive.google.com/file/d/1zR5Wp9iagHG379jsauLyLH_BTQQqatdF/view?usp=sharing) (more checkpoint we get can be checked here(#Datasets)) and run the following command:
+To run a demo, download a [checkpoint](https://drive.google.com/file/d/1zR5Wp9iagHG379jsauLyLH_BTQQqatdF/view?usp=sharing) (more checkpoint we get can be checked [HERE](#Datasets)) and run the following command:
 ```
 python demo.py --config config/moving-gif.yaml --checkpoint <path/to/checkpoint>
 ```
@@ -85,7 +85,7 @@ The source image and the result image:\
 <img src="visual/mgif_prediction.png" width="150" height="150">
 
 
-[create an anchor](#Datasets)
+### (#Datasets)
 
 1) **Shapes**. This dataset is saved along with repository. Download the [checkpoint](https://drive.google.com/file/d/108KLShVodN_KxtGUGg9cRJm0lWF0dBkg/view?usp=sharing).
 Training takes about 17 minutes in Colab.
