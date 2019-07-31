@@ -55,8 +55,8 @@ Heatmaps for individual keypoint locations:\
 <img src="visual/heat3.png" width="150" height="150">\
 The optical flow and the sampled image:\
 \
-<img src="visual/deform.png" width="200" height="200">
-<img src="visual/deformed.png" width="200" height="200">\
+<img src="visual/deform.png" width="150" height="150">
+<img src="visual/deformed.png" width="150" height="150">\
 The source image and the result image:\
 \
 <img src="visual/heatsource.png" width = "150" height="150">
