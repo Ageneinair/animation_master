@@ -47,7 +47,7 @@ You can also check training data reconstructions in the ```train-vis``` subfolde
 
 ### Demo results
 #### RPN
-<img src="visual/find-rois.png">
+![](visual/find-rois.png)
 #### Shapes
 ![Screenshot](visual/demo.gif)
 #### Taichi
