@@ -8,8 +8,15 @@ This repository contains the source code for the Columbia Summer '19 COMSW4995 D
 To install the dependencies run:
 ```
 pip install -r requirements.txt
+cd Mask_RCNN
+pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
+### Region Proposal Network Demo
+```
+python find_rois.py --image <path to input image>
+```
 
 ### Motion Transfer Demo 
 
@@ -39,6 +46,8 @@ You can also check training data reconstructions in the ```train-vis``` subfolde
 
 
 ### Demo results
+#### RPN
+<img src="visual/find-rois.png">
 #### Shapes
 ![Screenshot](visual/demo.gif)
 #### Taichi
