@@ -8,8 +8,8 @@ import h5py
 from argparse import ArgumentParser
 
 # Import Mask RCNN
-# ROOT_DIR_MASK = os.path.dirname(os.path.realpath(__file__))
-ROOT_DIR_MASK = os.path.abspath("../")
+ROOT_DIR_MASK = os.path.dirname(os.path.realpath(__file__))
+# ROOT_DIR_MASK = os.path.abspath("../")
 ROOT_DIR_MASK += "/Mask_RCNN"
 sys.path.append(ROOT_DIR_MASK)  # To find local version of the library
 from mrcnn import utils
@@ -64,7 +64,7 @@ class RoisDetector(object):
 
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument("--image", default='tai-chi.jpg', help="Path to input image")
+    parser.add_argument("--image", default='sup-mat/tai-chi.jpg', help="Path to input image")
     opt = parser.parse_args()
     image = cv2.imread(opt.image)
 
