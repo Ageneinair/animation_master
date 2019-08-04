@@ -70,11 +70,11 @@ class MotionTransferGenerator(nn.Module):
         
         #print(str(deformation.shape))
         deform = deformation[0, 0].cpu().numpy()
-        plt.imsave("visual/mgif_deform.png", np.sqrt(deform[:,:,0] ** 2 + deform[:,:,1] ** 2 + deform[:,:,2] ** 2))
+        #plt.imsave("visual/mgif_deform.png", np.sqrt(deform[:,:,0] ** 2 + deform[:,:,1] ** 2 + deform[:,:,2] ** 2))
 
         deformed_inp = F.grid_sample(inp, deformation)
         #print(str(deformed_inp.shape))
-        plt.imsave("visual/mgif_deformation.png", deformed_inp[0, 0, 0].cpu().numpy())
+        #plt.imsave("visual/mgif_deformation.png", deformed_inp[0, 0, 0].cpu().numpy())
 
         return deformed_inp
 
@@ -107,7 +107,7 @@ class MotionTransferGenerator(nn.Module):
         
         video_deformed = self.deform_input(source_image, deformations_absolute)
         #print(video_deformed.shape)
-        plt.imsave("visual/mgif_deformed.png", video_deformed[0, 0, 0].cpu().numpy())
+        #plt.imsave("visual/mgif_deformed.png", video_deformed[0, 0, 0].cpu().numpy())
         video_prediction = self.video_decoder(skips)
 
         """print(video_prediction.shape)
@@ -118,12 +118,12 @@ class MotionTransferGenerator(nn.Module):
 
         video_prediction = self.refinement_module(video_prediction)
         #print(video_prediction.shape)
-        plt.imsave("visual/mgif_prediction_before_sigmoid.png", video_prediction[0, 0, 0].cpu().numpy())
+        #plt.imsave("visual/mgif_prediction_before_sigmoid.png", video_prediction[0, 0, 0].cpu().numpy())
         video_prediction = torch.sigmoid(video_prediction)
 
         #print(video_prediction.shape)
-        predict = video_prediction[0, 0, 0].cpu().numpy()
-        plt.imsave("visual/mgif_prediction.png", predict)
+        #predict = video_prediction[0, 0, 0].cpu().numpy()
+        #plt.imsave("visual/mgif_prediction.png", predict)
 
         #print("si " + str(source_image.shape))
         #plt.imsave("sourceimage1.png", source_image[0, 0, 0].cpu().numpy())

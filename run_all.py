@@ -122,7 +122,7 @@ if __name__ == "__main__":
     generator.eval()
     kp_detector.eval()
 
-
+    frames_list = []
 
     for i, roi in enumerate(rois):
         (x1, y1, x2, y2) = roi
@@ -147,8 +147,27 @@ if __name__ == "__main__":
 
             out_video_batch = out['video_prediction'].data.cpu().numpy()
             out_video_batch = np.transpose(out_video_batch, [0, 2, 3, 4, 1])[0]
+            print(out_video_batch.shape)
+            
+            for i, frame in enumerate(out_video_batch):
+                outp_img = np.zeros(shape = (x2 - x1, y2 - y1))
+                outp_img = cv2.resize(src = frame, dst = outp_img, dsize = outp_img.shape)
+                
+                buffer_img = np.copy(img)
+                buffer_img[y1:y2, x1:x2] = (outp_img * 255).astype(np.uint8)
+                frames_list.append(buffer_img)
+
             imageio.mimsave(opt.out_file + str(i) + '.gif', (255 * out_video_batch).astype(np.uint8))
 
+
+    writer = cv2.VideoWriter('testvid.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (frames_list[0].shape[1], frames_list[0].shape[0]))
+    for frame in frames_list:
+        writer.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
+        #cv2.imshow('frame', frame)
+        #cv2.waitKey(0)
+        #cv2.destroyAllWindows()
+
+    writer.release()
 
     print("Created " + str(len(rois)) + " new gifs.")
     cv2.imwrite('find_rois.png',image)
