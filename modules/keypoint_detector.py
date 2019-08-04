@@ -97,7 +97,7 @@ class KPDetector(nn.Module):
 
     def forward(self, x):
 
-        print("x " + str(x.data.shape))
+        #print("x " + str(x.data.shape))
         plt.imsave("visual/mgif_heatsource.png", x.data[0, 0, 0].cpu().numpy())
         
         if self.scale_factor != 1:
@@ -109,7 +109,7 @@ class KPDetector(nn.Module):
         heatmap = F.softmax(heatmap / self.temperature, dim=3)
         heatmap = heatmap.view(*final_shape)
 
-        print(heatmap.data.shape)
+        #print(heatmap.data.shape)
         for i, hmap in enumerate(heatmap.data[0].cpu().numpy()):
             plt.imsave("visual/mgif_heat" + str(i) + ".png", hmap[0])
         
