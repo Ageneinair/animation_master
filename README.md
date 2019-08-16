@@ -13,7 +13,7 @@ This repository contains the source code of video synthesis project developed by
 ### Phase 1 Tai-Chi Result
 | Source | SourceRPN | Driving | Generated |
 | --- | --- | --- | --- |
-| <img src="Images/P1TaiChi_Source.png" width="200"> | <img src="Images/P1TaiChi_SourceRPN.png"> |<img src="Images/TaiChi_Driving.gif"> |<img src="Images/P1TaiChi_Generated.gif">|
+| <img src="Images/P1TaiChi_Source.png" width="256"> | <img src="Images/P1TaiChi_SourceRPN.png" width="256"> |<img src="Images/TaiChi_Driving.gif"> |<img src="Images/P1TaiChi_Generated.gif">|
 
 ### Motion transfer Demo
 ```
