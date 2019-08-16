@@ -37,7 +37,7 @@ python run_all_taichi.py --config config/taichi.yaml --driving_video path/to/vid
 ### Phase 2 Tai-Chi Result
 | Source | Driving | Generated |
 | --- | --- | --- |
-| <img src="Images/P3TaiChi_Source.jpg"> |<img src="Images/TaiChi_Driving.gif"> |<img src="Images/P3TaiChi_Generated.gif">|
+| <img src="Images/P3TaiChi_Source.jpg" width="100"> |<img src="Images/TaiChi_Driving.gif" width="100"> |<img src="Images/P3TaiChi_Generated.gif" width="100">|
 
 ### Motion transfer Demo
 Download the checkpoint first from [here](https://drive.google.com/file/d/1mSkQPe8TTILPdPHnEJiSKVLbbRgnD2Cu/view?usp=sharing)
