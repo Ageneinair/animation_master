@@ -20,6 +20,17 @@ python run_all_taichi.py --config config/taichi.yaml --driving_video path/to/vid
 ```
 
 ## Multi-Monkey-Net Phase 3
+### Motion transfer Demo
+Download the checkpoint first from [here](https://drive.google.com/file/d/1mSkQPe8TTILPdPHnEJiSKVLbbRgnD2Cu/view?usp=sharing)
+```
+cd new-monkey-net
+python demo.py --config  config/taichi.yaml --driving_video sup-mat/00001050.png --source_image sup-mat/64.jpg --checkpoint path/to/checkpoint
+```
+### Train a New Network
+```
+cd new-monkey-net
+CUDA_VISIBLE_DEVICES=0 python run.py --config config/dataset_name.yaml
+```
 
 ### Installation
 
