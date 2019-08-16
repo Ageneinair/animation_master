@@ -12,6 +12,7 @@ from scipy.spatial import ConvexHull
 import numpy as np
 
 from sync_batchnorm import DataParallelWithCallback
+import cv2
 
 
 def make_symetric_matrix(torch_matrix):
@@ -62,11 +63,22 @@ def normalize_kp(kp_video, kp_appearance, movement_mult=False, move_location=Fal
     return kp_video
 
 
-def transfer_one(generator, kp_detector, source_image, driving_video, transfer_params):
+def transfer_one(generator, kp_detector, source_image, driving_video, transfer_params, for_keyp_detection, left_border, right_border):
     cat_dict = lambda l, dim: {k: torch.cat([v[k] for v in l], dim=dim) for k in l[0]}
     d = driving_video.shape[2]
-    kp_driving = cat_dict([kp_detector(driving_video[:, :, i:(i + 1)]) for i in range(d)], dim=1)
-    kp_source = kp_detector(source_image)
+    #print("driving vid " + str(driving_video.shape))
+    kp_driving = cat_dict([kp_detector(driving_video[:, :, i:(i + 1)], 0, 64) for i in range(d)], dim=1)
+    kp_source = kp_detector(for_keyp_detection, left_border, right_border)
+    #print("kp_source var shape " + str(kp_source['var'].shape))
+    #print("kp_source mean shape " + str(kp_source['mean'].shape))
+    #kp_source = kp_detector(source_image)
+
+    #print("source image shape " + str(source_image.shape))
+    """keyp_map = np.zeros(shape = (64, 64)) + 255
+    for keypoint in kp_source['mean'][0, 0]:
+        keyp_map[int(keypoint[0].cpu()), int(keypoint[1].cpu())] = 0
+
+    cv2.imwrite("map.png", keyp_map)"""
 
     kp_driving_norm = normalize_kp(kp_driving, kp_source, **transfer_params['normalization_params'])
     kp_video_list = [{k: v[:, i:(i + 1)] for k, v in kp_driving_norm.items()} for i in range(d)]

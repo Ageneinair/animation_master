@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import os
 import sys
 import cv2
@@ -23,6 +22,8 @@ import coco
 # Import all Monkey-Net resources
 import matplotlib
 matplotlib.use('Agg')
+from matplotlib import pyplot as plt
+
 import torch
 from transfer import transfer_one
 import yaml
@@ -46,6 +47,11 @@ COCO_MODEL_PATH = os.path.join(ROOT_DIR_MASK, "mask_rcnn_coco.h5")
 if not os.path.exists(COCO_MODEL_PATH):
     utils.download_trained_weights(COCO_MODEL_PATH)
 
+def aed_loss(frame1, frame2):
+    return np.mean(np.sqrt(frame1 ** 2 - frame2 ** 2))
+
+def l1_loss(frame1, frame2):
+    return np.mean(np.abs(frame1 - frame2))
 
 # Mask RCNN
 class InferenceConfig(coco.CocoConfig):
@@ -67,7 +73,7 @@ class RoisDetector(object):
         # COCO Class names
         # Index of the class in the list is its ID. For example, to get ID of
         # the teddy bear class, use: class_names.index('teddy bear')
-        self.class_names = ['BG', 'person']
+        self.class_names = ['BG', 'person', 'horse']
 
     def get_rois(self, origin_image):
         # Run detection
@@ -75,8 +81,10 @@ class RoisDetector(object):
         r = results[0]
         rois = []
         for i in range(len(r['class_ids'])):
-            y1, x1, y2, x2 = r['rois'][i]
-            rois.append([min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2)])
+            if (r['scores'][i] > 0.9):
+                y1, x1, y2, x2 = r['rois'][i]
+                rois.append([min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2)])
+            print(r['scores'][i])
         return rois
 
 
@@ -91,12 +99,18 @@ if __name__ == "__main__":
     parser.add_argument("--cpu", dest = "cpu", action = "store_true", help = "Use cpu")
 
     opt = parser.parse_args()
-    image = cv2.imread(opt.image)
+    #image = cv2.imread(opt.image)
+    image = cv2.resize(src = cv2.imread(opt.image), dst = None, dsize = opt.image_shape)
+
+    cv2.imshow('test', image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     rd = RoisDetector()
     rois = rd.get_rois(image)
     img = np.copy(image)
     
+    train_shape = (opt.image_shape[0] // 2, opt.image_shape[1])
 
     with open(opt.config) as f:
             config = yaml.load(f)
@@ -124,19 +138,35 @@ if __name__ == "__main__":
 
     frames_list = []
 
+    offset = 64
+
     for i, roi in enumerate(rois):
         (x1, y1, x2, y2) = roi
+
         cv2.rectangle(image, (x1, y1), (x2, y2), (0,0,255), 2)
+
+        cv2.imwrite('find_rois.png', image)
         #cv2.imwrite('object' + str(i) + '.png', img[y1:y2, x1:x2])
 
         """ HERE RUN MONKEY-NET ON THE SEPARATE OBJECT """
-        inp_img = np.zeros(shape = opt.image_shape)
-        inp_img = cv2.resize(src = img[y1:y2, x1:x2], dst = inp_img, dsize = inp_img.shape)
+        inp_img = np.zeros(shape = (opt.image_shape[1], opt.image_shape[0] // 2) + (3, )) + 255
+
+        #print("inp_img shape " + str(inp_img.shape))
+        #print("img shape " + str(img.shape))
+        if x1 > offset:
+            inp_img[y1:y2, x1 - offset:x2 - offset] = img[y1:y2, x1:x2]
+        else:
+            inp_img[y1:y2, x1:x2] = img[y1:y2, x1:x2]
+
+        #inp_img = cv2.resize(src = inp_img, dst = None, dsize = train_shape)
         cv2.imwrite('object' + str(i) + '.png', inp_img)
+        #cv2.imshow('the input', inp_img)
+        #cv2.waitKey(0)
+        #cv2.destroyAllWindows()
 
         with torch.no_grad():
-            driving_video = VideoToTensor()(read_video(opt.driving_video, opt.image_shape + (3, )))['video']
-            source_image = VideoToTensor()(read_video('object' + str(i) + '.png', opt.image_shape + (3, )))['video'][:, :1]
+            driving_video = VideoToTensor()(read_video(opt.driving_video, train_shape + (3, )))['video']
+            source_image = VideoToTensor()(read_video('object' + str(i) + '.png', train_shape + (3, )))['video'][:, :1]
             #print("source image shape " + str(source_image.shape))
             #print("inp_img shape " + str(inp_img.shape))
 
@@ -149,28 +179,38 @@ if __name__ == "__main__":
             out_video_batch = np.transpose(out_video_batch, [0, 2, 3, 4, 1])[0]
             print(out_video_batch.shape)
             
-            for i, frame in enumerate(out_video_batch):
+            for ind, frame in enumerate(out_video_batch):
                 outp_img = np.zeros(shape = (x2 - x1, y2 - y1))
-                outp_img = cv2.resize(src = frame, dst = outp_img, dsize = outp_img.shape)
+
+                outp_img = frame[y1:y2, x1 - offset:x2 - offset]
+
+                #outp_img = cv2.resize(src = frame, dst = None, dsize = outp_img.shape)
                 
-                buffer_img = np.copy(img)
-                buffer_img[y1:y2, x1:x2] = (outp_img * 255).astype(np.uint8)
-                frames_list.append(buffer_img)
+                if len(frames_list) < len(out_video_batch):
+                    buffer_img = cv2.resize(src = img, dst = None, dsize = opt.image_shape)[:, :, ::-1]
+                    #print("buffer_img shape " + str(buffer_img.shape))
+                    #print("outp_img shape " + str(outp_img.shape))
+                    buffer_img[y1:y2, x1:x2] = (outp_img * 255).astype(np.uint8)
+                    frames_list.append(buffer_img)
+                else:
+                    frames_list[ind][y1:y2, x1:x2] = (outp_img * 255).astype(np.uint8)
 
-            imageio.mimsave(opt.out_file + str(i) + '.gif', (255 * out_video_batch).astype(np.uint8))
+            imageio.mimsave('gif_object' + str(i) + '.gif', (255 * out_video_batch).astype(np.uint8))
 
 
-    writer = cv2.VideoWriter('testvid.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (frames_list[0].shape[1], frames_list[0].shape[0]))
-    for frame in frames_list:
-        writer.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
-        #cv2.imshow('frame', frame)
-        #cv2.waitKey(0)
-        #cv2.destroyAllWindows()
+    imageio.mimsave('testresult.gif', frames_list)
 
-    writer.release()
+
+    transformed = np.zeros(shape = (len(frames_list[::3]) * offset, 2 * offset, 3), dtype = np.uint8)
+    for i, frame in enumerate(frames_list[::3]):
+        transformed[i*offset:(i+1)*offset, :] = frame
+        if int(i) == 5:
+            continue
+
+    plt.imsave('transformed.png', transformed)
 
     print("Created " + str(len(rois)) + " new gifs.")
-    cv2.imwrite('find_rois.png',image)
+    #cv2.imwrite('find_rois.png',image)
     #cv2.imshow('ROIS', image)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()

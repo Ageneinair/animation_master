@@ -3,6 +3,9 @@ import torch
 import torch.nn.functional as F
 from modules.util import Hourglass, make_coordinate_grid, matrix_inverse, smallest_singular
 
+from matplotlib import pyplot as plt
+import numpy as np
+from skimage.transform import resize
 
 def kp2gaussian(kp, spatial_size, kp_variance='matrix'):
     """
@@ -94,7 +97,11 @@ class KPDetector(nn.Module):
         self.scale_factor = scale_factor
         self.clip_variance = clip_variance
 
-    def forward(self, x):
+    def forward(self, x, left_border, right_border):
+
+        #print("x " + str(x.data.shape))
+        #plt.imsave("visual/mgif_heatsource.png", x.data[0, 0, 0].cpu().numpy())
+        
         if self.scale_factor != 1:
             x = F.interpolate(x, scale_factor=(1, self.scale_factor, self.scale_factor))
 
@@ -104,6 +111,39 @@ class KPDetector(nn.Module):
         heatmap = F.softmax(heatmap / self.temperature, dim=3)
         heatmap = heatmap.view(*final_shape)
 
-        out = gaussian2kp(heatmap, self.kp_variance, self.clip_variance)
+        #print("heatmap shape " + str(heatmap.data.shape))
+        #print(heatmap.data[0, 0, 0])
+        #for i, hmap in enumerate(heatmap.data[0].cpu().numpy()):
+            #plt.imsave("visual/mgif_heat" + str(i) + ".png", hmap[0])
+        """
+        keypoint_map = np.zeros(shape = (64, 64)) + 255
+        for i, hmap in enumerate(heatmap.data[0].cpu().numpy()):
+            (x_coord, y_coord) = (0, 0)
+            keypoint_map -= hmap[0]
+            for line in range(hmap.shape[0]):
+                for col in range(hmap.shape[1]):
+                    x_coord += col * hmap[0][line, col]
+                    y_coord += line * hmap[0][line, col]
+
+            x_coord //= 64 * 64
+            y_coord //= 64 * 64
+            keypoint_map[int(y_coord), int(x_coord)] = 255
+
+        plt.imsave('map.png', keypoint_map)
+        """
+        new_heatmap = torch.zeros(heatmap.shape)
+        for i, hmap in enumerate(heatmap.data[0].cpu().numpy()):
+            rhmap = resize(hmap[0], (hmap[0].shape[0], right_border - left_border), preserve_range = True)
+            #plt.imsave('hmap' + str(i) + '.png', hmap[0])
+            #plt.imsave('rhmap' + str(i) + '.png', rhmap)
+            #print("rhmap shape " + str(rhmap.shape))
+            #print("new hmap shape " + str(new_heatmap[0, i, 0, :, left_border:right_border].shape))
+            new_heatmap[0, i, 0, :, left_border:right_border] = torch.from_numpy(rhmap)
+            plt.imsave('newhmap' + str(i) + '.png', new_heatmap[0, i, 0].data.numpy())
+
+        
+        out = gaussian2kp(new_heatmap, self.kp_variance, self.clip_variance)
+
+        #print("output of kp detecor " + str(out))
 
         return out
