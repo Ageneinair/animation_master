@@ -28,7 +28,7 @@ python run_all_taichi.py --config config/taichi.yaml --driving_video path/to/vid
 Download the checkpoint first from [here](https://drive.google.com/file/d/1mSkQPe8TTILPdPHnEJiSKVLbbRgnD2Cu/view?usp=sharing)
 ```
 cd new-monkey-net
-python demo.py --config  config/taichi.yaml --driving_video sup-mat/00001050.png --source_image sup-mat/64.jpg --checkpoint path/to/checkpoint
+python demo.py --config  config/taichi.yaml --driving_video ../sup-mat/00001050.png --source_image sup-mat/64.jpg --checkpoint <path/to/checkpoint> --image_shape 64,64
 ```
 ### Train a New Network
 ```
