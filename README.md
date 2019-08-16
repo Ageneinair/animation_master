@@ -25,7 +25,7 @@ python run_all_mgif.py --config config/moving-gif.yaml --driving_video path/to/v
 ### Phase 2 Tai-Chi Result
 | Source | SourceRPN | Driving | Generated |
 | --- | --- | --- | --- |
-| <img src="Images/P2TaiChi_Source.png"> | <img src="Images/P2TaiChi_SourceRPN.png"> |<img src="Images/TaiChi_Driving.gif"> |<img src="Images/P2TaiChi_Generated.gif">|
+| <img src="Images/P2TaiChi_Source.png" width="200"> | <img src="Images/P2TaiChi_SourceRPN.png" width="200"> |<img src="Images/TaiChi_Driving.gif" width="100"> |<img src="Images/P2TaiChi_Generated.gif" width="100">|
 
 ### Motion transfer Demo
 ```
