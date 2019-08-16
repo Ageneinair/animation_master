@@ -34,7 +34,7 @@ python run_all_taichi.py --config config/taichi.yaml --driving_video path/to/vid
 
 ## Multi-Monkey-Net Phase 3
 
-### Phase 2 Tai-Chi Result
+### Phase 3 Tai-Chi Result
 | Source | Driving | Generated |
 | --- | --- | --- |
 | <img src="Images/P3TaiChi_Source.jpg" width="200"> |<img src="Images/TaiChi_Driving.gif" width="100"> |<img src="Images/P3TaiChi_Generated.gif" width="200">|
