@@ -5,6 +5,11 @@ This repository contains the source code of video synthesis project developed by
 
 ## Multi-Monkey-Net Phase 1 
 
+| Source | SourceRPN | Driving | Generated |
+| --- | --- | --- | --- |
+| git status | List all new or modified files |List all new or modified files |List all new or modified files |
+| git diff | Show file differences that haven't been staged | git diff| git diff|
+
 ```
 python run_all_mgif.py --config config/moving-gif.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image path/to/image --image_shape image,shape
 ```
