@@ -7,7 +7,7 @@ This repository contains the source code of video synthesis project developed by
 
 | Source | SourceRPN | Driving | Generated |
 | --- | --- | --- | --- |
-| git status | List all new or modified files |List all new or modified files |List all new or modified files |
+| <img src="Images/P1MovingGif_Source.png" width="60%" height="60%"> | List all new or modified files |List all new or modified files |List all new or modified files |
 | git diff | Show file differences that haven't been staged | git diff| git diff|
 
 ```
