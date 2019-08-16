@@ -29,7 +29,7 @@ python run_all_mgif.py --config config/moving-gif.yaml --driving_video sup-mat/d
 
 ### Motion transfer Demo
 ```
-python run_all_taichi.py --config config/taichi.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image  --image_shape 256,256
+python run_all_taichi.py --config config/taichi.yaml --driving_video Images/TaiChi_Driving.gif --checkpoint path/to/checkpoint --image Images/P2TaiChi_Source.png --image_shape 256,256
 ```
 
 ## Multi-Monkey-Net Phase 3
