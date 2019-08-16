@@ -36,7 +36,7 @@ cd new-monkey-net
 CUDA_VISIBLE_DEVICES=0 python run.py --config config/dataset_name.yaml
 ```
 
-### Installation
+## Installation Guide
 
 To install the dependencies run:
 ```
