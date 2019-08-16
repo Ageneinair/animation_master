@@ -38,7 +38,7 @@ CUDA_VISIBLE_DEVICES=0 python run.py --config config/dataset_name.yaml
 
 ## Installation Guide
 
-To install the dependencies run:
+### Install Dependencies
 ```
 pip install -r requirements.txt
 cd Mask_RCNN
