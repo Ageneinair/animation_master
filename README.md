@@ -78,58 +78,6 @@ To check the loss values during training in see ```log.txt```.
 You can also check training data reconstructions in the ```train-vis``` subfolder.
 
 
-### Demo results
-
-#### RPN
-![Screenshot](visual/find_rois.png)
-
-#### Shapes
-![Screenshot](visual/demo.gif)
-
-#### Taichi
-![Screenshot](visual/taichi-demo.gif)
-
-
-### Visualization examples
-#### Shapes dataset
-Heatmaps for individual keypoint locations:\
-\
-<img src="visual/heat0.png" width="150" height="150">
-<img src="visual/heat1.png" width="150" height="150">
-<img src="visual/heat2.png" width="150" height="150">
-<img src="visual/heat3.png" width="150" height="150">\
-The optical flow and the sampled image:\
-\
-<img src="visual/deform.png" width="150" height="150">
-<img src="visual/deformed.png" width="150" height="150">\
-The source image and the result image:\
-\
-<img src="visual/heatsource.png" width = "150" height="150">
-<img src="visual/prediction.png" width="150" height="150">
-
-#### MovingGif dataset
-Heatmaps for individual keypoint locations:\
-\
-<img src="visual/mgif_heat0.png" width="150" height="150">
-<img src="visual/mgif_heat1.png" width="150" height="150">
-<img src="visual/mgif_heat2.png" width="150" height="150">
-<img src="visual/mgif_heat3.png" width="150" height="150">
-<img src="visual/mgif_heat4.png" width="150" height="150">\
-<img src="visual/mgif_heat5.png" width="150" height="150">
-<img src="visual/mgif_heat6.png" width="150" height="150">
-<img src="visual/mgif_heat7.png" width="150" height="150">
-<img src="visual/mgif_heat8.png" width="150" height="150">
-<img src="visual/mgif_heat9.png" width="150" height="150">\
-The optical flow and the sampled image:\
-\
-<img src="visual/mgif_deform.png" width="150" height="150">
-<img src="visual/mgif_deformed.png" width="150" height="150">\
-The source image and the result image:\
-\
-<img src="visual/mgif_heatsource.png" width="150" height="150">
-<img src="visual/mgif_prediction.png" width="150" height="150">
-
-
 ### Datasets
 
 1) **Shapes**. This dataset is saved along with repository. Download the [checkpoint](https://drive.google.com/file/d/108KLShVodN_KxtGUGg9cRJm0lWF0dBkg/view?usp=sharing).
