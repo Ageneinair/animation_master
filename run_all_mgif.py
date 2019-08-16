@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
     frames_list = []
 
-    offset = 64
+    offset = 128
 
     for i, roi in enumerate(rois):
         (x1, y1, x2, y2) = roi
