@@ -1,7 +1,7 @@
 # Multi-Object Motion Transfer
 ## Columbia Summer '19 COMSW4995 Deep Learning Project
 
-This repository contains the source code of video synthesis project developed by [Xipeng Xie](https://github.com/Ageneinair), [Nikita Lockshin](https://github.com/Smthri), and [LianFeng Li](https://github.com/KnightLian). This project is inspired by [Monkey-Net](http://www.stulyakov.com/papers/monkey-net.html) from Siarohin *et al.* and by [Mask-RCNN](https://github.com/matterport/Mask_RCNN) from Abdulla *et al.*
+This repository contains the source code of video synthesis project developed by [Xipeng Xie](https://github.com/Ageneinair), [Nikita Lockshin](https://github.com/Smthri), and [LianFeng Li](https://github.com/KnightLian). This project is inspired by [Monkey-Net](http://www.stulyakov.com/papers/monkey-net.html) from Siarohin *et al.* and by [Mask-RCNN](https://github.com/matterport/Mask_RCNN) from Abdulla *et al.* We propose a method to animate multiple objects from the source image to follow another object's motion pattern in a driving video by utilizing deep motion transfer.
 
 ## Multi-Monkey-Net Phase 1 
 
@@ -17,7 +17,7 @@ This repository contains the source code of video synthesis project developed by
 
 ### Motion transfer Demo
 ```
-python run_all_mgif.py --config config/moving-gif.yaml --driving_video sup-mat/driving.png --checkpoint path/to/checkpoint --image path/to/image sup-mat/target2.png --image_shape 256,128
+python run_all_mgif.py --config config/moving-gif.yaml --driving_video sup-mat/driving.png --checkpoint path/to/checkpoint --image sup-mat/target2.png --image_shape 256,128
 ```
 
 ## Multi-Monkey-Net Phase 2
