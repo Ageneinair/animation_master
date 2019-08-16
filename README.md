@@ -7,7 +7,7 @@ This repository contains the source code of video synthesis project developed by
 
 | Source | SourceRPN | Driving | Generated |
 | --- | --- | --- | --- |
-| <img src="Images/P1MovingGif_Source.png" width="60%" height="60%"> | <img src="Images/P1MovingGif_SourceRPN.png" width="60%" height="60%"> |<img src="Images/MovingGif_Driving.gif" width="60%" height="60%"> |<img src="Images/P1MovingGif_Generated.png" width="60%" height="60%">|
+| <img src="Images/P1MovingGif_Source.png" width="60%" height="60%"> | <img src="Images/P1MovingGif_SourceRPN.png" width="60%" height="60%"> |<img src="Images/MovingGif_Driving.gif" width="60%" height="60%"> |<img src="Images/P1MovingGif_Generated.gif" width="60%" height="60%">|
 
 ```
 python run_all_mgif.py --config config/moving-gif.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image path/to/image --image_shape image,shape
