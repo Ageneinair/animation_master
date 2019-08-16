@@ -5,12 +5,12 @@ This repository contains the source code of video synthesis project developed by
 
 ## Multi-Monkey-Net Phase 1 
 
-### Moving-Gif
+### Moving-Gif Result
 | Source | SourceRPN | Driving | Generated |
 | --- | --- | --- | --- |
 | <img src="Images/P1MovingGif_Source.png"> | <img src="Images/P1MovingGif_SourceRPN.png"> |<img src="Images/MovingGif_Driving.gif"> |<img src="Images/P1MovingGif_Generated.gif">|
   
-### Tai-Chi
+### Tai-Chi Result
 | Source | SourceRPN | Driving | Generated |
 | --- | --- | --- | --- |
 | <img src="Images/P1TaiChi_Source.png"> | <img src="Images/P1TaiChi_SourceRPN.png"> |<img src="Images/TaiChi_Driving.gif"> |<img src="Images/P1TaiChi_Generated.gif">|
