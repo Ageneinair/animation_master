@@ -1,5 +1,5 @@
 # Multi-Object Motion Transfer
-## Animating all things, Columbia Summer '19 COMSW4995 Deep Learning Project
+## Columbia Summer '19 COMSW4995 Deep Learning Project
 
 This repository contains the source code of video synthesis project developed by [Xipeng Xie](https://github.com/Ageneinair), [Nikita Lockshin](https://github.com/Smthri), and [LianFeng Li](https://github.com/KnightLian). This project is inspired by [Monkey-Net](http://www.stulyakov.com/papers/monkey-net.html) from Siarohin *et al.* and by [Mask-RCNN](https://github.com/matterport/Mask_RCNN) from Abdulla *et al.*
 
