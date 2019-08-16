@@ -5,7 +5,7 @@ This repository contains the source code of video synthesis project developed by
 
 ## Multi-Monkey-Net Phase 1 
 
-### Moving-Gif Result
+### Phase 1 Moving-Gif Result
 | Source | SourceRPN | Driving | Generated |
 | --- | --- | --- | --- |
 | <img src="Images/P1MovingGif_Source.png"> | <img src="Images/P1MovingGif_SourceRPN.png"> |<img src="Images/MovingGif_Driving.gif"> |<img src="Images/P1MovingGif_Generated.gif">|
