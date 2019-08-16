@@ -14,16 +14,20 @@ This repository contains the source code of video synthesis project developed by
 | --- | --- | --- | --- |
 | <img src="Images/P1TaiChi_Source.png"> | <img src="Images/P1TaiChi_SourceRPN.png"> |<img src="Images/TaiChi_Driving.gif"> |<img src="Images/P1TaiChi_Generated.gif">|
 
+### Motion transfer Demo
 ```
 python run_all_mgif.py --config config/moving-gif.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image path/to/image --image_shape image,shape
 ```
 
 ## Multi-Monkey-Net Phase 2
+
+### Motion transfer Demo
 ```
 python run_all_taichi.py --config config/taichi.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image path/to/image --image_shape image,shape
 ```
 
 ## Multi-Monkey-Net Phase 3
+
 ### Motion transfer Demo
 Download the checkpoint first from [here](https://drive.google.com/file/d/1mSkQPe8TTILPdPHnEJiSKVLbbRgnD2Cu/view?usp=sharing)
 ```
