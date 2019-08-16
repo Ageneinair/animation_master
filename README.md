@@ -1,7 +1,7 @@
-# Animating all things
-### Columbia Summer '19 COMSW4995 Deep Learning Final Project
+# Multi-Object Motion Transfer
+## Animating all things, Columbia Summer '19 COMSW4995 Deep Learning Project
 
-This repository contains the source code for the Columbia Summer '19 COMSW4995 Deep Learning final project by [Xipeng Xie](https://github.com/Ageneinair), [Nikita Lockshin](https://github.com/Smthri), [LianFeng Li](https://github.com/KnightLian). This project is inspired by Siarohin *et al*'s work in [Monkey-net](http://www.stulyakov.com/papers/monkey-net.html) and [Mask-RCNN](https://github.com/matterport/Mask_RCNN).
+This repository contains the source code of video synthesis project developed by [Xipeng Xie](https://github.com/Ageneinair), [Nikita Lockshin](https://github.com/Smthri), and [LianFeng Li](https://github.com/KnightLian). This project is inspired by Siarohin *et al*'s work in [Monkey-net](http://www.stulyakov.com/papers/monkey-net.html) and Abdulla *et al* in [Mask-RCNN](https://github.com/matterport/Mask_RCNN).
 
 ### Installation
 
