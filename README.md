@@ -17,7 +17,7 @@ This repository contains the source code of video synthesis project developed by
 
 ### Motion transfer Demo
 ```
-python run_all_mgif.py --config config/moving-gif.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image path/to/image --image_shape image,shape
+python run_all_mgif.py --config config/moving-gif.yaml --driving_video sup-mat/driving.png --checkpoint path/to/checkpoint --image path/to/image sup-mat/target2.png --image_shape 256,128
 ```
 
 ## Multi-Monkey-Net Phase 2
@@ -29,7 +29,7 @@ python run_all_mgif.py --config config/moving-gif.yaml --driving_video path/to/v
 
 ### Motion transfer Demo
 ```
-python run_all_taichi.py --config config/taichi.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image path/to/image --image_shape image,shape
+python run_all_taichi.py --config config/taichi.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image  --image_shape 256,256
 ```
 
 ## Multi-Monkey-Net Phase 3
