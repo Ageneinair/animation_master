@@ -8,6 +8,11 @@ This repository contains the source code of video synthesis project developed by
 | Source | SourceRPN | Driving | Generated |
 | --- | --- | --- | --- |
 | <img src="Images/P1MovingGif_Source.png"> | <img src="Images/P1MovingGif_SourceRPN.png"> |<img src="Images/MovingGif_Driving.gif"> |<img src="Images/P1MovingGif_Generated.gif">|
+  
+
+| Source | SourceRPN | Driving | Generated |
+| --- | --- | --- | --- |
+| <img src="Images/P1TaiChi_Source.png"> | <img src="Images/P1TaiChi_SourceRPN.png"> |<img src="Images/TaiChi_Driving.gif"> |<img src="Images/P1TaiChi_Generated.gif">|
 
 ```
 python run_all_mgif.py --config config/moving-gif.yaml --driving_video path/to/video --checkpoint path/to/checkpoint --image path/to/image --image_shape image,shape
